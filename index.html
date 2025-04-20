@@ -34,7 +34,7 @@
       object-fit: cover;
     }
 
-    .mask {
+    .mask-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -42,19 +42,18 @@
       height: 100%;
       background: rgba(240, 240, 240, 0.95);
       z-index: 0;
-      mix-blend-mode: multiply;
+      pointer-events: none;
     }
 
     .reveal-circle {
       position: absolute;
-      width: 300px;
-      height: 300px;
       border-radius: 50%;
       background: transparent;
-      filter: blur(30px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       transform: translate(-50%, -50%);
       pointer-events: none;
-      z-index: 1;
+      transition: all 0.3s ease-out;
     }
 
     .overlay {
@@ -178,8 +177,7 @@
       <source src="images/Background_Video.mov" type="video/quicktime">
     </video>
   </div>
-  <div class="mask"></div>
-  <div class="reveal-circle" id="revealCircle"></div>
+  <div class="mask-overlay" id="maskOverlay"></div>
   <div class="overlay"></div>
 
   <nav>
@@ -200,27 +198,42 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const video = document.getElementById('bgVideo');
-      const revealCircle = document.getElementById('revealCircle');
+      const maskOverlay = document.getElementById('maskOverlay');
       let forward = true;
+      let circles = [];
 
       // Set playback speed to 0.25x
       video.playbackRate = 0.25;
 
-      // Mouse movement effect
-      document.addEventListener('mousemove', function(e) {
-        const x = e.clientX;
-        const y = e.clientY;
-        revealCircle.style.left = x + 'px';
-        revealCircle.style.top = y + 'px';
-      });
+      // Create initial circles
+      function createCircles() {
+        const numCircles = 3;
+        for (let i = 0; i < numCircles; i++) {
+          const circle = document.createElement('div');
+          circle.className = 'reveal-circle';
+          const size = Math.random() * 200 + 100; // Random size between 100px and 300px
+          circle.style.width = `${size}px`;
+          circle.style.height = `${size}px`;
+          circle.style.left = `${Math.random() * 100}%`;
+          circle.style.top = `${Math.random() * 100}%`;
+          maskOverlay.appendChild(circle);
+          circles.push(circle);
+        }
+      }
 
-      // Touch movement effect
-      document.addEventListener('touchmove', function(e) {
-        const x = e.touches[0].clientX;
-        const y = e.touches[0].clientY;
-        revealCircle.style.left = x + 'px';
-        revealCircle.style.top = y + 'px';
-      });
+      // Animate circles
+      function animateCircles() {
+        circles.forEach(circle => {
+          const newX = Math.random() * 100;
+          const newY = Math.random() * 100;
+          circle.style.left = `${newX}%`;
+          circle.style.top = `${newY}%`;
+        });
+      }
+
+      // Initialize circles and start animation
+      createCircles();
+      setInterval(animateCircles, 3000);
 
       video.addEventListener('timeupdate', function() {
         if (forward && video.currentTime >= video.duration - 0.1) {
