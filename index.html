@@ -151,7 +151,7 @@
 </head>
 <body>
   <div class="video-background">
-    <video autoplay loop muted playsinline>
+    <video id="bgVideo" autoplay muted playsinline style="playbackRate: 0.5;">
       <source src="images/Background_Video.mov" type="video/quicktime">
     </video>
   </div>
@@ -171,5 +171,46 @@
     <a href="privacy-policy.html">Privacy Policy</a>
     <a href="terms.html">Terms of Use</a>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('bgVideo');
+      let forward = true;
+
+      // Set playback speed to 0.5x (half speed)
+      video.playbackRate = 0.5;
+
+      video.addEventListener('timeupdate', function() {
+        // Check if video is near the end when playing forward
+        if (forward && video.currentTime >= video.duration - 0.1) {
+          forward = false;
+          // Play in reverse by moving backwards through the video
+          reversePlayback();
+        }
+        // Check if video is near the start when playing backwards
+        else if (!forward && video.currentTime <= 0.1) {
+          forward = true;
+          video.play();
+        }
+      });
+
+      function reversePlayback() {
+        let interval = setInterval(function() {
+          if (video.currentTime <= 0) {
+            clearInterval(interval);
+            forward = true;
+            video.play();
+          } else {
+            video.currentTime -= 0.033; // Move backwards by one frame (assuming 30fps)
+          }
+        }, 33.33); // Update every frame (1000ms/30fps ≈ 33.33ms)
+      }
+
+      // Ensure video starts playing
+      video.play().catch(function(error) {
+        console.log("Video autoplay failed:", error);
+      });
+    });
+  </script>
 </body>
 </html> 
