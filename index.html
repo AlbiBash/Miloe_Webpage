@@ -151,7 +151,7 @@
 </head>
 <body>
   <div class="video-background">
-    <video id="bgVideo" autoplay muted playsinline style="playbackRate: 0.5;">
+    <video id="bgVideo" autoplay muted playsinline>
       <source src="images/Background_Video.mov" type="video/quicktime">
     </video>
   </div>
@@ -178,7 +178,7 @@
       let forward = true;
 
       // Set playback speed to 0.5x (half speed)
-      video.playbackRate = 0.5;
+      video.playbackRate = 0.25;
 
       video.addEventListener('timeupdate', function() {
         // Check if video is near the end when playing forward
