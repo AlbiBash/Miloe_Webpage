@@ -34,29 +34,6 @@
       object-fit: cover;
     }
 
-    .mask-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(240, 240, 240, 0.85);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .reveal-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: transparent;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      mix-blend-mode: multiply;
-    }
-
     .overlay {
       position: fixed;
       top: 0;
@@ -65,6 +42,22 @@
       height: 100%;
       background: rgba(255, 255, 255, 0.7);
       z-index: 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, transparent 20%, black 20%);
+      -webkit-mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, transparent 20%, black 20%);
+      transition: mask-image 0.3s ease, -webkit-mask-image 0.3s ease;
+    }
+
+    .overlay::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: -1;
     }
 
     nav {
@@ -178,7 +171,6 @@
       <source src="images/Background_Video.mov" type="video/quicktime">
     </video>
   </div>
-  <div class="mask-overlay" id="maskOverlay"></div>
   <div class="overlay"></div>
 
   <nav>
@@ -199,61 +191,37 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const video = document.getElementById('bgVideo');
-      const maskOverlay = document.getElementById('maskOverlay');
+      const overlay = document.querySelector('.overlay');
       let forward = true;
-      let circles = [];
-      let mouseX = 0;
-      let mouseY = 0;
 
-      // Set playback speed to 0.25x
+      // Set playback speed to 0.5x (half speed)
       video.playbackRate = 0.25;
 
-      // Track mouse movement
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        updateCirclePositions();
+      // Add mousemove event to update the circle position
+      document.addEventListener('mousemove', function(e) {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        overlay.style.setProperty('--x', `${x}%`);
+        overlay.style.setProperty('--y', `${y}%`);
       });
 
-      // Create initial circles
-      function createCircles() {
-        const numCircles = 3;
-        for (let i = 0; i < numCircles; i++) {
-          const circle = document.createElement('div');
-          circle.className = 'reveal-circle';
-          const size = Math.random() * 200 + 100; // Random size between 100px and 300px
-          circle.style.width = `${size}px`;
-          circle.style.height = `${size}px`;
-          circle.style.left = `${Math.random() * 100}%`;
-          circle.style.top = `${Math.random() * 100}%`;
-          maskOverlay.appendChild(circle);
-          circles.push(circle);
-        }
-      }
-
-      // Update circle positions based on mouse movement
-      function updateCirclePositions() {
-        circles.forEach((circle, index) => {
-          const size = parseInt(circle.style.width);
-          const offset = (index + 1) * 100; // Stagger the circles
-          
-          // Calculate new position with some offset from mouse
-          const newX = mouseX + (Math.cos(index) * offset);
-          const newY = mouseY + (Math.sin(index) * offset);
-          
-          circle.style.left = `${newX}px`;
-          circle.style.top = `${newY}px`;
-        });
-      }
-
-      // Initialize circles
-      createCircles();
+      // Add touchmove event for mobile devices
+      document.addEventListener('touchmove', function(e) {
+        const touch = e.touches[0];
+        const x = (touch.clientX / window.innerWidth) * 100;
+        const y = (touch.clientY / window.innerHeight) * 100;
+        overlay.style.setProperty('--x', `${x}%`);
+        overlay.style.setProperty('--y', `${y}%`);
+      });
 
       video.addEventListener('timeupdate', function() {
+        // Check if video is near the end when playing forward
         if (forward && video.currentTime >= video.duration - 0.1) {
           forward = false;
+          // Play in reverse by moving backwards through the video
           reversePlayback();
         }
+        // Check if video is near the start when playing backwards
         else if (!forward && video.currentTime <= 0.1) {
           forward = true;
           video.play();
@@ -267,11 +235,12 @@
             forward = true;
             video.play();
           } else {
-            video.currentTime -= 0.033;
+            video.currentTime -= 0.033; // Move backwards by one frame (assuming 30fps)
           }
-        }, 33.33);
+        }, 33.33); // Update every frame (1000ms/30fps ≈ 33.33ms)
       }
 
+      // Ensure video starts playing
       video.play().catch(function(error) {
         console.log("Video autoplay failed:", error);
       });
