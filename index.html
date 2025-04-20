@@ -40,7 +40,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(240, 240, 240, 0.95);
+      background: rgba(240, 240, 240, 0.85);
       z-index: 0;
       pointer-events: none;
     }
@@ -49,11 +49,12 @@
       position: absolute;
       border-radius: 50%;
       background: transparent;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       transform: translate(-50%, -50%);
       pointer-events: none;
-      transition: all 0.3s ease-out;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      mix-blend-mode: multiply;
     }
 
     .overlay {
@@ -201,9 +202,18 @@
       const maskOverlay = document.getElementById('maskOverlay');
       let forward = true;
       let circles = [];
+      let mouseX = 0;
+      let mouseY = 0;
 
       // Set playback speed to 0.25x
       video.playbackRate = 0.25;
+
+      // Track mouse movement
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        updateCirclePositions();
+      });
 
       // Create initial circles
       function createCircles() {
@@ -221,19 +231,23 @@
         }
       }
 
-      // Animate circles
-      function animateCircles() {
-        circles.forEach(circle => {
-          const newX = Math.random() * 100;
-          const newY = Math.random() * 100;
-          circle.style.left = `${newX}%`;
-          circle.style.top = `${newY}%`;
+      // Update circle positions based on mouse movement
+      function updateCirclePositions() {
+        circles.forEach((circle, index) => {
+          const size = parseInt(circle.style.width);
+          const offset = (index + 1) * 100; // Stagger the circles
+          
+          // Calculate new position with some offset from mouse
+          const newX = mouseX + (Math.cos(index) * offset);
+          const newY = mouseY + (Math.sin(index) * offset);
+          
+          circle.style.left = `${newX}px`;
+          circle.style.top = `${newY}px`;
         });
       }
 
-      // Initialize circles and start animation
+      // Initialize circles
       createCircles();
-      setInterval(animateCircles, 3000);
 
       video.addEventListener('timeupdate', function() {
         if (forward && video.currentTime >= video.duration - 0.1) {
