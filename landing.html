@@ -15,8 +15,9 @@
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
       color: #ffffff;
       line-height: 1.5;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       background-color: rgb(39, 37, 35);
     }
 
@@ -108,12 +109,12 @@
     }
 
     .content {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -55%);
+      position: relative;
+      flex: 1;
       z-index: 1;
       max-width: 932px;
+      margin: 0 auto;
+      padding: 100px 50px;
       text-align: left;
     }
 
@@ -175,10 +176,11 @@
     }
 
     footer {
-      position: fixed;
-      bottom: 50px;
+      position: relative;
+      bottom: 0;
       left: 50px;
       z-index: 2;
+      padding: 50px 0;
     }
 
     footer a {
@@ -201,16 +203,10 @@
       body {
         overflow-y: auto;
         height: auto;
-        min-height: 100vh;
       }
 
       .content {
-        position: relative;
-        top: 0;
-        left: 0;
-        transform: none;
-        padding: 100px 24px 100px;
-        margin: 0 auto;
+        padding: 100px 24px;
         width: 100%;
       }
 
@@ -242,10 +238,8 @@
 
       footer {
         position: relative;
-        bottom: auto;
-        left: auto;
-        padding: 24px;
-        text-align: left;
+        left: 24px;
+        padding: 24px 0;
       }
 
       footer a {
