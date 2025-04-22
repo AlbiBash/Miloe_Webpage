@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - MILOE</title>
+  <title>About - MILOE</title>
   <style>
     :root {
       --primary-color: #000000;
@@ -12,8 +12,6 @@
       --background-color: #FFFFFF;
       --text-color: #1D1D1F;
       --spacing-unit: 8px;
-      --error-color: #FF3B30;
-      --success-color: #34C759;
     }
 
     * {
@@ -58,93 +56,41 @@
       color: var(--primary-color);
     }
 
-    .contact-form {
-      margin-top: calc(var(--spacing-unit) * 8);
-    }
-
-    .form-group {
-      margin-bottom: calc(var(--spacing-unit) * 4);
-    }
-
-    label {
-      display: block;
-      margin-bottom: calc(var(--spacing-unit) * 2);
-      font-size: 16px;
-      color: var(--text-color);
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: calc(var(--spacing-unit) * 3);
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-      font-family: inherit;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      transition: border-color 0.2s ease;
-    }
-
-    input:focus,
-    textarea:focus {
-      outline: none;
-      border-color: var(--accent-color);
-    }
-
-    textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .submit-btn {
-      background-color: var(--primary-color);
-      color: var(--background-color);
-      border: none;
-      padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 6);
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
-
-    .submit-btn:hover {
-      opacity: 0.9;
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .error-message {
-      color: var(--error-color);
-      font-size: 14px;
-      margin-top: calc(var(--spacing-unit) * 2);
-      display: none;
-    }
-
-    .success-message {
-      color: var(--success-color);
-      font-size: 16px;
-      margin-top: calc(var(--spacing-unit) * 4);
-      text-align: center;
-      display: none;
-    }
-
-    .email-link {
-      margin-top: calc(var(--spacing-unit) * 8);
-      text-align: center;
-    }
-
-    .email-link a {
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: calc(var(--spacing-unit) * 8) 0 calc(var(--spacing-unit) * 4);
       color: var(--primary-color);
+    }
+
+    p {
+      font-size: 17px;
+      margin-bottom: calc(var(--spacing-unit) * 4);
+      color: var(--text-color);
+    }
+
+    .about-content {
+      margin-top: calc(var(--spacing-unit) * 8);
+    }
+
+    .contact-info {
+      margin-top: calc(var(--spacing-unit) * 8);
+      padding: calc(var(--spacing-unit) * 4);
+      background-color: rgba(0, 0, 0, 0.02);
+      border-radius: 8px;
+    }
+
+    .contact-info p {
+      margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+
+    .contact-info a {
+      color: var(--accent-color);
       text-decoration: none;
-      font-size: 18px;
       transition: opacity 0.2s ease;
     }
 
-    .email-link a:hover {
+    .contact-info a:hover {
       opacity: 0.8;
     }
 
@@ -156,6 +102,10 @@
       h1 {
         font-size: 28px;
       }
+
+      h2 {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
@@ -165,125 +115,29 @@
       <a href="javascript:history.back()" class="back-link">
         <span>Back</span>
       </a>
-      <h1>Contact Us</h1>
+      <h1>About MILOE</h1>
     </div>
 
-    <div class="contact-form">
-      <form id="contactForm" action="https://formspree.io/f/info@sloffly.com" method="POST">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required minlength="2" maxlength="100">
-          <div class="error-message" id="nameError">Please enter a valid name (2-100 characters)</div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-          <div class="error-message" id="emailError">Please enter a valid email address</div>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required minlength="10" maxlength="1000"></textarea>
-          <div class="error-message" id="messageError">Please enter a message (10-1000 characters)</div>
-        </div>
-        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
-        <div class="success-message" id="successMessage">Thank you for your message! We'll get back to you soon.</div>
-      </form>
-    </div>
+    <div class="about-content">
+      <h2>Our Mission</h2>
+      <p>MILOE is designed to help you transform your thoughts into positive affirmations through the power of AI. Our mission is to support your journey towards greater self-awareness and emotional well-being, one reflection at a time.</p>
 
-    <div class="email-link">
-      <p>Or email us directly at <a href="mailto:info@sloffly.com">info@sloffly.com</a></p>
+      <h2>How It Works</h2>
+      <p>Using advanced AI technology, MILOE analyzes your journal entries to create personalized affirmations that resonate with your experiences and emotions. The app maintains your privacy by processing data locally and only sending anonymized content when generating affirmations.</p>
+
+      <h2>Privacy & Security</h2>
+      <p>We take your privacy seriously. All journal entries are stored locally on your device, and any data sent for affirmation generation is completely anonymized. We don't collect personal information, track your usage, or share your data with third parties.</p>
+
+      <h2>Our Values</h2>
+      <p>MILOE is built on the principles of mindfulness, privacy, and personal growth. We believe in creating tools that respect your data while helping you cultivate a more positive and reflective mindset.</p>
+
+      <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>Have questions or feedback? We'd love to hear from you.</p>
+        <p>Email: <a href="mailto:info@sloffly.com">info@sloffly.com</a></p>
+        <p>We typically respond within 24-48 hours.</p>
+      </div>
     </div>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('contactForm');
-      const submitBtn = document.getElementById('submitBtn');
-      const successMessage = document.getElementById('successMessage');
-      const errorMessages = {
-        name: document.getElementById('nameError'),
-        email: document.getElementById('emailError'),
-        message: document.getElementById('messageError')
-      };
-
-      function validateForm() {
-        let isValid = true;
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const message = form.message.value.trim();
-
-        // Validate name
-        if (name.length < 2 || name.length > 100) {
-          errorMessages.name.style.display = 'block';
-          isValid = false;
-        } else {
-          errorMessages.name.style.display = 'none';
-        }
-
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-          errorMessages.email.style.display = 'block';
-          isValid = false;
-        } else {
-          errorMessages.email.style.display = 'none';
-        }
-
-        // Validate message
-        if (message.length < 10 || message.length > 1000) {
-          errorMessages.message.style.display = 'block';
-          isValid = false;
-        } else {
-          errorMessages.message.style.display = 'none';
-        }
-
-        return isValid;
-      }
-
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        if (!validateForm()) {
-          return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-
-        try {
-          const response = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {
-              'Accept': 'application/json'
-            }
-          });
-
-          if (response.ok) {
-            form.reset();
-            successMessage.style.display = 'block';
-            setTimeout(() => {
-              successMessage.style.display = 'none';
-            }, 5000);
-          } else {
-            throw new Error('Form submission failed');
-          }
-        } catch (error) {
-          console.error('Error:', error);
-          alert('Sorry, there was an error sending your message. Please try again later.');
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Message';
-        }
-      });
-
-      // Add input event listeners for real-time validation
-      ['name', 'email', 'message'].forEach(field => {
-        form[field].addEventListener('input', function() {
-          validateForm();
-        });
-      });
-    });
-  </script>
 </body>
 </html> 
