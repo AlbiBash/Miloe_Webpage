@@ -43,32 +43,34 @@
       height: 100%;
       background: rgba(239, 239, 239, 1);
       z-index: 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       mask-image: radial-gradient(circle at var(--x, 20%) var(--y, 20%), 
         transparent 0%, 
-        transparent 15%, 
-        rgba(0, 0, 0, 0.1) 20%, 
-        rgba(0, 0, 0, 0.2) 25%, 
-        rgba(0, 0, 0, 0.3) 30%, 
-        rgba(0, 0, 0, 0.4) 35%, 
-        rgba(0, 0, 0, 0.5) 40%, 
-        rgba(0, 0, 0, 0.6) 45%, 
-        rgba(0, 0, 0, 0.7) 50%, 
-        rgba(0, 0, 0, 0.8) 55%, 
-        rgba(0, 0, 0, 0.9) 60%, 
-        black 65%);
+        transparent 10%, 
+        rgba(0, 0, 0, 0.1) 15%, 
+        rgba(0, 0, 0, 0.2) 20%, 
+        rgba(0, 0, 0, 0.3) 25%, 
+        rgba(0, 0, 0, 0.4) 30%, 
+        rgba(0, 0, 0, 0.5) 35%, 
+        rgba(0, 0, 0, 0.6) 40%, 
+        rgba(0, 0, 0, 0.7) 45%, 
+        rgba(0, 0, 0, 0.8) 50%, 
+        rgba(0, 0, 0, 0.9) 55%, 
+        black 60%);
       -webkit-mask-image: radial-gradient(circle at var(--x, 20%) var(--y, 20%), 
         transparent 0%, 
-        transparent 15%, 
-        rgba(0, 0, 0, 0.1) 20%, 
-        rgba(0, 0, 0, 0.2) 25%, 
-        rgba(0, 0, 0, 0.3) 30%, 
-        rgba(0, 0, 0, 0.4) 35%, 
-        rgba(0, 0, 0, 0.5) 40%, 
-        rgba(0, 0, 0, 0.6) 45%, 
-        rgba(0, 0, 0, 0.7) 50%, 
-        rgba(0, 0, 0, 0.8) 55%, 
-        rgba(0, 0, 0, 0.9) 60%, 
-        black 65%);
+        transparent 10%, 
+        rgba(0, 0, 0, 0.1) 15%, 
+        rgba(0, 0, 0, 0.2) 20%, 
+        rgba(0, 0, 0, 0.3) 25%, 
+        rgba(0, 0, 0, 0.4) 30%, 
+        rgba(0, 0, 0, 0.5) 35%, 
+        rgba(0, 0, 0, 0.6) 40%, 
+        rgba(0, 0, 0, 0.7) 45%, 
+        rgba(0, 0, 0, 0.8) 50%, 
+        rgba(0, 0, 0, 0.9) 55%, 
+        black 60%);
       transition: mask-image 0.3s ease, -webkit-mask-image 0.3s ease;
     }
 
@@ -95,6 +97,8 @@
       text-decoration: none;
       font-size: 14px;
       padding: 8px 16px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       border-radius: 4px;
       transition: opacity 0.3s ease;
     }
@@ -150,6 +154,8 @@
       text-decoration: none;
       font-size: 14px;
       margin-right: 16px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       padding: 8px 12px;
       border-radius: 4px;
       transition: opacity 0.3s ease;
@@ -177,44 +183,35 @@
       footer {
         bottom: 24px;
         left: 24px;
-        right: 24px;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-      }
-
-      footer a {
-        margin-right: 0;
       }
 
       .overlay {
         mask-image: radial-gradient(circle at var(--x, 20%) var(--y, 20%), 
           transparent 0%, 
-          transparent 25%, 
-          rgba(0, 0, 0, 0.1) 30%, 
-          rgba(0, 0, 0, 0.2) 35%, 
-          rgba(0, 0, 0, 0.3) 40%, 
-          rgba(0, 0, 0, 0.4) 45%, 
-          rgba(0, 0, 0, 0.5) 50%, 
-          rgba(0, 0, 0, 0.6) 55%, 
-          rgba(0, 0, 0, 0.7) 60%, 
-          rgba(0, 0, 0, 0.8) 65%, 
-          rgba(0, 0, 0, 0.9) 70%, 
-          black 75%);
+          transparent 15%, 
+          rgba(0, 0, 0, 0.1) 20%, 
+          rgba(0, 0, 0, 0.2) 25%, 
+          rgba(0, 0, 0, 0.3) 30%, 
+          rgba(0, 0, 0, 0.4) 35%, 
+          rgba(0, 0, 0, 0.5) 40%, 
+          rgba(0, 0, 0, 0.6) 45%, 
+          rgba(0, 0, 0, 0.7) 50%, 
+          rgba(0, 0, 0, 0.8) 55%, 
+          rgba(0, 0, 0, 0.9) 60%, 
+          black 65%);
         -webkit-mask-image: radial-gradient(circle at var(--x, 20%) var(--y, 20%), 
           transparent 0%, 
-          transparent 25%, 
-          rgba(0, 0, 0, 0.1) 30%, 
-          rgba(0, 0, 0, 0.2) 35%, 
-          rgba(0, 0, 0, 0.3) 40%, 
-          rgba(0, 0, 0, 0.4) 45%, 
-          rgba(0, 0, 0, 0.5) 50%, 
-          rgba(0, 0, 0, 0.6) 55%, 
-          rgba(0, 0, 0, 0.7) 60%, 
-          rgba(0, 0, 0, 0.8) 65%, 
-          rgba(0, 0, 0, 0.9) 70%, 
-          black 75%);
+          transparent 15%, 
+          rgba(0, 0, 0, 0.1) 20%, 
+          rgba(0, 0, 0, 0.2) 25%, 
+          rgba(0, 0, 0, 0.3) 30%, 
+          rgba(0, 0, 0, 0.4) 35%, 
+          rgba(0, 0, 0, 0.5) 40%, 
+          rgba(0, 0, 0, 0.6) 45%, 
+          rgba(0, 0, 0, 0.7) 50%, 
+          rgba(0, 0, 0, 0.8) 55%, 
+          rgba(0, 0, 0, 0.9) 60%, 
+          black 65%);
       }
     }
   </style>
