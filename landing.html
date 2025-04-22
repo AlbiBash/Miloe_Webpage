@@ -207,7 +207,8 @@
       .content {
         position: relative;
         top: 0;
-        left: 0;
+        left: 24px;
+        right: 24px;
         transform: none;
         padding: 100px 24px 100px;
         margin: 0 auto;
@@ -215,7 +216,7 @@
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 32px;
         width: 100%;
         margin-top: 0;
         padding-top: 0;
@@ -236,21 +237,22 @@
 
       nav {
         position: absolute;
-        top: 24px;
+        top: 20px;
         right: 24px;
       }
 
       footer {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        padding: 24px;
-        text-align: center;
+        bottom: 24px;
+        left: 24px;
+        right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
       }
 
       footer a {
-        display: inline-block;
-        margin: 0 8px;
+        margin-right: 0;
       }
     }
   </style>
