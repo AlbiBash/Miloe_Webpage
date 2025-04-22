@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - SLOFFLY</title>
+  <title>Contact - MILOE</title>
   <style>
     :root {
       --primary-color: #000000;
@@ -12,6 +12,8 @@
       --background-color: #FFFFFF;
       --text-color: #1D1D1F;
       --spacing-unit: 8px;
+      --error-color: #FF3B30;
+      --success-color: #34C759;
     }
 
     * {
@@ -81,6 +83,13 @@
       font-family: inherit;
       background-color: var(--background-color);
       color: var(--text-color);
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
     }
 
     textarea {
@@ -101,6 +110,26 @@
 
     .submit-btn:hover {
       opacity: 0.9;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 14px;
+      margin-top: calc(var(--spacing-unit) * 2);
+      display: none;
+    }
+
+    .success-message {
+      color: var(--success-color);
+      font-size: 16px;
+      margin-top: calc(var(--spacing-unit) * 4);
+      text-align: center;
+      display: none;
     }
 
     .email-link {
@@ -140,20 +169,24 @@
     </div>
 
     <div class="contact-form">
-      <form action="mailto:info@sloffly.com" method="post" enctype="text/plain">
+      <form id="contactForm" action="https://formspree.io/f/info@sloffly.com" method="POST">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
+          <input type="text" id="name" name="name" required minlength="2" maxlength="100">
+          <div class="error-message" id="nameError">Please enter a valid name (2-100 characters)</div>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
+          <div class="error-message" id="emailError">Please enter a valid email address</div>
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
+          <textarea id="message" name="message" required minlength="10" maxlength="1000"></textarea>
+          <div class="error-message" id="messageError">Please enter a message (10-1000 characters)</div>
         </div>
-        <button type="submit" class="submit-btn">Send Message</button>
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+        <div class="success-message" id="successMessage">Thank you for your message! We'll get back to you soon.</div>
       </form>
     </div>
 
@@ -161,5 +194,96 @@
       <p>Or email us directly at <a href="mailto:info@sloffly.com">info@sloffly.com</a></p>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const successMessage = document.getElementById('successMessage');
+      const errorMessages = {
+        name: document.getElementById('nameError'),
+        email: document.getElementById('emailError'),
+        message: document.getElementById('messageError')
+      };
+
+      function validateForm() {
+        let isValid = true;
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
+
+        // Validate name
+        if (name.length < 2 || name.length > 100) {
+          errorMessages.name.style.display = 'block';
+          isValid = false;
+        } else {
+          errorMessages.name.style.display = 'none';
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          errorMessages.email.style.display = 'block';
+          isValid = false;
+        } else {
+          errorMessages.email.style.display = 'none';
+        }
+
+        // Validate message
+        if (message.length < 10 || message.length > 1000) {
+          errorMessages.message.style.display = 'block';
+          isValid = false;
+        } else {
+          errorMessages.message.style.display = 'none';
+        }
+
+        return isValid;
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!validateForm()) {
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            form.reset();
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+            }, 5000);
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Sorry, there was an error sending your message. Please try again later.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
+      });
+
+      // Add input event listeners for real-time validation
+      ['name', 'email', 'message'].forEach(field => {
+        form[field].addEventListener('input', function() {
+          validateForm();
+        });
+      });
+    });
+  </script>
 </body>
 </html> 
