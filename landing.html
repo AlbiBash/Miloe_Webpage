@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SLOFFLY – Minimalist apps for reflection, growth, and presence</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      color: #ffffff;
+      line-height: 1.5;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000000;
+    }
+
+    .background-image {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transform: rotate(90deg);
+      transform-origin: top right;
+    }
+
+    nav {
+      position: fixed;
+      top: 50px;
+      right: 50px;
+      z-index: 2;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 8px 16px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 4px;
+      transition: opacity 0.3s ease;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    .content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      max-width: 911px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      max-width: 911px;
+    }
+
+    .store-badge {
+      font-size: 16px;
+      color: #000;
+      background: #fff;
+      padding: 12px 24px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 32px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 50px;
+      left: 50px;
+      z-index: 2;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      margin-right: 16px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: opacity 0.3s ease;
+    }
+
+    footer a:hover {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        left: 24px;
+        right: 24px;
+        transform: translateY(-50%);
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      nav {
+        top: 24px;
+        right: 24px;
+      }
+
+      footer {
+        bottom: 24px;
+        left: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-image"></div>
+
+  <nav>
+    <a href="miloe.html">Miloe</a>
+  </nav>
+
+  <main class="content">
+    <h1>SLOFFLY</h1>
+    <p>Minimalist apps for reflection, growth, and presence. Sloffly is a collection of calm, intentional tools designed to support emotional well-being, thoughtful learning, and self-awareness. Guided by the principles of slow living, each app encourages users to pause, reflect, and engage deeply — with themselves and the world around them. Built with simplicity at the core, Sloffly apps aim to reduce noise and create space for meaningful insight and personal growth. The first release, MILOE, offers daily affirmations rooted in your own reflections, helping turn everyday experiences into lasting inner strength. More to come.</p>
+    <div class="store-badge">Available in Apple Store soon</div>
+  </main>
+
+  <footer>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+  </footer>
+</body>
+</html> 
